@@ -72,7 +72,7 @@ const Game1 = () => {
 
       setTimeout(()=>{
         setShowScore(true)
-      },2500)
+      },1500)
       return;
     }
 
@@ -81,7 +81,7 @@ const Game1 = () => {
       setIsPlaying(false);
        setTimeout(()=>{
         setShowScore(true)
-      },2500)
+      },1500)
       return;
     }
   }
