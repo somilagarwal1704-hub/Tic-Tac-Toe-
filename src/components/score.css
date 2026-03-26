@@ -1,0 +1,86 @@
+.container {
+  animation: slideDown 0.5s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.button-container {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button hover */
+.button-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 75, 43, 0.7);
+}
+
+/* Button click */
+.button-container:active {
+  transform: scale(0.95);
+}
+
+.table-container {
+  width: 100%;
+  margin-top: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+th {
+  background: rgba(0, 234, 255, 0.2);
+  color: #00eaff;
+  padding: 10px;
+  font-size: 16px;
+}
+td {
+  padding: 12px;
+  text-align: center;
+  font-size: 16px;
+}
+tr {
+  background: rgba(255, 255, 255, 0.05);
+}
+tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+tr:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.win-row {
+  background: linear-gradient(135deg, #00ff87, #60efff) !important;
+  color: black;
+  font-weight: bold;
+}

@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 import "./Game1.css";
-
+import Score from "./Score";
 const Square = ({ value, idx, clickFn, isWinning }) => {
-  const style = {
-    width: "60px",
-    height: "60px",
-    border: "1px solid black",
-    fontSize: "24px",
-    
-  };
-
   return (
     <button
       className={`square ${isWinning ? "winner" : ""} ${value ? "filled" : ""}`}
-      style={style}
       onClick={() => {
         clickFn(idx);
       }}
@@ -28,9 +19,11 @@ const Game1 = () => {
   const [arr, setArr] = useState(Array(9).fill(null));
   const [isPlaying, setIsPlaying] = useState(true);
   const [winningLine,setWinningLine]=useState([]);
-  const [result,setResult]=useState(null)
+  const [result,setResult]=useState(null);
+  const [score, setScore]=useState({X:0 , O:0});
+  const [showScore, setShowScore]=useState(false)
 
-  function checkWinner(board) {
+  function checkWinner(board) { 
     const winPatterns = [
       [0, 1, 2],
       [3, 4, 5],
@@ -73,14 +66,33 @@ const Game1 = () => {
       setWinningLine(resultData.line)
       setResult(`Winner ${resultData.winner}`)
       setIsPlaying(false);
+      setScore((prev)=>({
+        ...prev, [resultData.winner]:prev[resultData.winner]+1
+      }))
+
+      setTimeout(()=>{
+        setShowScore(true)
+      },2500)
       return;
     }
 
     if (!newArr.includes(null)) {
       setResult("Match Draw")
       setIsPlaying(false);
+       setTimeout(()=>{
+        setShowScore(true)
+      },2500)
       return;
     }
+  }
+
+  function handleRestart(){
+    setArr(Array(9).fill(null));
+     setPlayer("X");
+    setIsPlaying(true);
+    setWinningLine([]);
+    setResult(null);
+    setShowScore(false)
   }
 
   function handleReset(){
@@ -88,10 +100,14 @@ const Game1 = () => {
      setPlayer("X");
     setIsPlaying(true);
     setWinningLine([]);
-    setResult(null)
+    setResult(null);
+    setShowScore(false);
+    setScore({X:0,O:0})
   }
 
   return (
+    <>
+    { !showScore ?
     <div className="parent">
       <div className="container">
         <h1>Tic Tac Toe</h1>
@@ -104,10 +120,13 @@ const Game1 = () => {
             );
           })}
         </div>
-          <button className="button-container" onClick={handleReset}>Reset</button>
       </div>
     </div>
+    : <Score winner={result} score={score} isPlaying={isPlaying} fnRestart={handleRestart} fnReset={handleReset} />
+}
+         </>  
   );
-};
+}
+
 
 export default Game1;
